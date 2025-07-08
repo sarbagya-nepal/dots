@@ -1,0 +1,155 @@
+/* Color Variables */
+@define-color bg_transparent    transparent;
+@define-color text_primary      #C5C9C7;
+@define-color bg_workspaces     #1b1f27;
+@define-color bg_primary        #14171d;
+@define-color accent_blue       #8ba4b0;
+@define-color hover_gray        #A4A7A4;
+@define-color urgent_red        #E46876;
+@define-color success_green     #87A987;
+@define-color warning_yellow    #E6C384;
+@define-color accent_purple     #938AA9;
+@define-color muted_green       #8A9A7B;
+
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family: Hack Nerd Font;
+  font-size: 13px;
+}
+
+window#waybar {
+  background-color: @bg_transparent;
+  border: none;
+  color: @text_primary;
+}
+
+button {
+  box-shadow: none;
+  border: none;
+}
+
+#workspaces {
+  background-color: @bg_workspaces;
+  border-radius: 10px;
+  padding: 0px 5px;
+}
+
+#workspaces button {
+  color: @bg_primary;
+  background-color: @bg_primary;
+  border-radius: 50px;
+  padding: 0 1rem;
+  margin: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  border-radius: 10px;
+  padding: 0 1.8rem;
+  background-color: @accent_blue;
+  color: @bg_primary;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:hover {
+  background: @hover_gray;
+  text-shadow: none;
+}
+
+#workspaces button.urgent {
+  background-color: @urgent_red;
+}
+
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-menu,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#backlight,
+#clock,
+#mpd {
+  margin: 0 5px;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background-color: @bg_primary;
+}
+
+#clock {
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: @accent_blue;
+}
+
+#battery.full {
+  color: @success_green;
+}
+
+#custom-menu {
+  font-size: 1.2rem;
+}
+
+#works {
+  border-radius: 10px;
+  background-color: @bg_workspaces;
+}
+
+#window.empty {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+#custom-windows_name {
+  border-radius: 10px;
+  padding: 5px 15px;
+  padding-left: 0;
+  color: @accent_blue;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @success_green;
+}
+
+#battery.critical:not(.charging) {
+  color: @urgent_red;
+}
+
+#backlight {
+  color: @warning_yellow;
+  font-size: 1.2rem;
+}
+
+#network {
+  color: @accent_purple;
+}
+
+#pulseaudio {
+  color: @urgent_red;
+}
+
+#pulseaudio.muted {
+  color: @muted_green;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+}
