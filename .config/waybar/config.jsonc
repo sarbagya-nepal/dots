@@ -8,11 +8,11 @@
 
   "modules-left": [
     "custom/menu",
-    "clock"
+    "clock",
+    "custom/media"
   ],
   "modules-center": [
-    "group/works",
-    "custom/media"
+    "group/works"
   ],
   "modules-right": [
     "backlight",
@@ -40,7 +40,7 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10,
+        "spacing": 10
         // "icons": {
         //   "blueman": "bluetooth",
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
@@ -50,12 +50,18 @@
       "format": "󰣇",
       "on-click": "$HOME/.config/waybar/extras/menu.sh"
     },
-    "custom/windows_name":{
-      "exec": "~/.config/waybar/extras/windows.sh",
-      "interval": 1,
-      "return-type": "text",
-      "tooltip": false
+    // "custom/windows_name":{
+    //   "exec": "~/.config/waybar/extras/windows.sh",
+    //   "restart-interval": 1,
+    //   "return-type": "text",
+    //   "tooltip": false
+    // },
+  "custom/windows_name": {
+    // "exec": "hyprctl activewindow -j | jq -r 'if .class then .class else \"\" end'",
+    "exec": "hyprctl activewindow -j | jq -r 'if .class then (.class[0:1] | ascii_upcase) + .class[1:] else \"\" end'",
+    "restart-interval": 0
     },
+
     "clock": {
       "format": " {:%H:%M %p}",
       "tooltip-format": "{:%Y-%m-%d}",
@@ -96,6 +102,19 @@
         "custom/windows_name"
       ]
     },
+  "custom/media":{
+    "format": "{}",
+        "exec": "~/.config/waybar/extras/media.sh",
+        "exec-if": "pgrep spotify",
+        "interval": 2,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/extras/media.sh toggle",
+        "on-scroll-up": "~/.config/waybar/extras/media.sh prev",
+        "on-scroll-down": "~/.config/waybar/extras/media.sh next",
+        "tooltip": true,
+        "max-length": 60,
+        "escape": true
+  },
     "pulseaudio": {
       "scroll-step": 2,
       "format": "{volume}% {icon}",

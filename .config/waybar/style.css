@@ -13,7 +13,7 @@
 
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: Hack Nerd Font;
+  font-family: "Hack Nerd Font","Hack Nerd Font Proppo";
   font-size: 13px;
 }
 
@@ -54,7 +54,8 @@ button {
 }
 
 #workspaces button:hover {
-  background: @hover_gray;
+  background: @accent_purple;
+  padding: 0 1.8rem;
   text-shadow: none;
 }
 
@@ -71,6 +72,7 @@ button {
 #pulseaudio,
 #wireplumber,
 #custom-menu,
+#custom-media,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -98,6 +100,9 @@ button {
 
 #custom-menu {
   font-size: 1.2rem;
+}
+#custom-media {
+  color: @muted_green;
 }
 
 #works {
