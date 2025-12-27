@@ -4,7 +4,9 @@
   "position": "top", // Waybar position (top|bottom|left|right)
   // "height": 30, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
-  "margin": 10,
+  "margin-left": 10,
+  "margin-right": 10,
+  "margin-top": 5,
 
   "modules-left": [
     "custom/menu",
@@ -12,7 +14,7 @@
     "custom/media"
   ],
   "modules-center": [
-    "group/works"
+    "hyprland/workspaces"
   ],
   "modules-right": [
     "backlight",
@@ -38,6 +40,11 @@
         "*": 5
       }
     },
+    "hyprland/window": {
+  "format": "{class}",
+  "format-empty": "",
+  "separate-outputs": true
+	},
     "tray": {
         // "icon-size": 21,
         "spacing": 10
@@ -49,17 +56,6 @@
     "custom/menu": {
       "format": "󰣇",
       "on-click": "$HOME/.config/waybar/extras/menu.sh"
-    },
-    // "custom/windows_name":{
-    //   "exec": "~/.config/waybar/extras/windows.sh",
-    //   "restart-interval": 1,
-    //   "return-type": "text",
-    //   "tooltip": false
-    // },
-  "custom/windows_name": {
-    // "exec": "hyprctl activewindow -j | jq -r 'if .class then .class else \"\" end'",
-    "exec": "hyprctl activewindow -j | jq -r 'if .class then (.class[0:1] | ascii_upcase) + .class[1:] else \"\" end'",
-    "restart-interval": 0
     },
 
     "clock": {
@@ -82,7 +78,7 @@
       },
       "format": "{capacity}% {icon}",
       "format-full": "{capacity}% {icon}",
-      "format-charging": "{capacity}% ",
+      "format-charging": "{capacity}% ",
       "format-plugged": "{capacity}% ",
       "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
@@ -99,7 +95,7 @@
       "orientation": "inherit",
       "modules": [
         "hyprland/workspaces",
-        "custom/windows_name"
+        "hyprland/window"
       ]
     },
   "custom/media":{

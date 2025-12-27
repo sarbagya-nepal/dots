@@ -1,19 +1,19 @@
 /* Color Variables */
 @define-color bg_transparent    transparent;
-@define-color text_primary      #C5C9C7;
-@define-color bg_workspaces     #1b1f27;
+@define-color text_primary      #a9b1d6;
+@define-color bg_workspaces     #1a1b26;
 @define-color bg_primary        #14171d;
-@define-color accent_blue       #8ba4b0;
-@define-color hover_gray        #A4A7A4;
-@define-color urgent_red        #E46876;
-@define-color success_green     #87A987;
-@define-color warning_yellow    #E6C384;
+@define-color accent_blue       #7aa2f7;
+@define-color hover_gray        #414868;
+@define-color urgent_red        #f7768e;
+@define-color success_green     #73daca;
+@define-color warning_yellow    #20af68;
 @define-color accent_purple     #938AA9;
-@define-color muted_green       #8A9A7B;
+@define-color muted_green       #9ece6a;
 
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: "Hack Nerd Font","Hack Nerd Font Proppo";
+  font-family: "Hack Nerd Font", "Hack Nerd Font Proppo";
   font-size: 13px;
 }
 
@@ -105,21 +105,10 @@ button {
   color: @muted_green;
 }
 
-#works {
-  border-radius: 10px;
-  background-color: @bg_workspaces;
-}
-
-#window.empty {
-  background: transparent;
-  padding: 0;
-  margin: 0;
-}
-
-#custom-windows_name {
+#window {
+  background-color: @bg_primary;
   border-radius: 10px;
   padding: 5px 15px;
-  padding-left: 0;
   color: @accent_blue;
   font-weight: bold;
   margin: 0 5px;
@@ -151,10 +140,10 @@ button {
   color: @muted_green;
 }
 
-#tray>.passive {
+#tray > .passive {
   -gtk-icon-effect: dim;
 }
 
-#tray>.needs-attention {
+#tray > .needs-attention {
   -gtk-icon-effect: highlight;
 }
