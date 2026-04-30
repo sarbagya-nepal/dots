@@ -2,7 +2,6 @@ configuration {
   display-drun: "Applications:";
   display-window: "Windows:";
   drun-display-format: "{icon} {name}";
-  font: "FiraCode Nerd Font Medium 14";
   show-icons: true;
   modi: "window,run,drun";
   icon-theme: "Papirus";
@@ -11,11 +10,11 @@ configuration {
 @theme "/dev/null"
 
 * {
-  bg: #1a1b26;
-  bg-alt: #414868;
+  bg: #090e13;
+  bg-alt: #121c26;
 
-  fg: #7aa2f7;
-  fg-alt: #a9b1d6;
+  fg: #8ba4b0;
+  fg-alt: #c5c9c7;
 
   background-color: @bg;
 
