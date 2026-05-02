@@ -1,0 +1,166 @@
+/* ========== Hide tab bar when only one tab ========== */
+#tabbrowser-tabs[hasadjacentnewtabbutton]:not([overflow]) 
+  .tabbrowser-tab:only-of-type {
+  display: none !important;
+}
+
+#tabbrowser-tabs:has(.tabbrowser-tab:only-of-type) {
+  visibility: collapse !important;
+}
+
+/* ========== Tabs fill full width ========== */
+.tabbrowser-tab[fadein]:not([style^="max-width"]){ max-width: 100vw !important }
+
+.tabbrowser-tab[selected]:not(:hover):not([pinned]) .tab-label-container,
+#tabbrowser-tabs:not([closebuttons="activetab"]) .tabbrowser-tab:not(:hover):not([pinned]) .tab-label-container{
+  padding-inline-end: 0px !important;
+}
+.tab-icon-stack{
+  margin-inline-start: auto
+}
+.tab-label-container{
+  max-width: min-content;
+  margin-inline-end: auto;
+}
+
+#urlbar:not([focused]) #urlbar-input, /* ID for Firefox 70 */
+#urlbar:not([focused]) .urlbar-input{ text-align: center !important; }
+
+
+/* Dont show tab close button */
+.tabbrowser-tab .tab-close-button{
+  display:none;
+}
+
+
+/* hide the navbar when not hovered or in focus ;) */
+
+
+:root{
+  --uc-navbar-transform: -40px;
+  --uc-autohide-toolbar-delay: 0.6s;
+  --uc-autohide-toolbar-duration: 200ms;
+}
+:root[uidensity="compact"]{ --uc-navbar-transform: -34px }
+
+#navigator-toolbox > div{ display: contents; }
+:root[sessionrestored] :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox,#notifications-toolbar){
+  transform: translateY(var(--uc-navbar-transform))
+}
+:root:is([customizing],[chromehidden*="toolbar"]) :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox,#notifications-toolbar){
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+#nav-bar:not([customizing]){
+  opacity: 0;
+  transition:  transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay), opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important;
+  position: relative;
+  z-index: 2;
+}
+
+#navigator-toolbox,
+#sidebar-box,
+#sidebar-main,
+#sidebar-splitter,
+#tabbrowser-tabbox{
+  z-index: auto !important;
+}
+/* Show when toolbox is focused, like when urlbar has received focus */
+#navigator-toolbox:focus-within > .browser-toolbar{
+  transform: translateY(0);
+  opacity: 1;
+  transition-duration: var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+  transition-delay: 0s !important;
+}
+/* Show when toolbox is hovered */
+.browser-titlebar:hover ~ :is(#nav-bar,#PersonalToolbar),
+#nav-bar:hover,
+#nav-bar:hover + #PersonalToolbar{
+  transform: translateY(0);
+  opacity: 1;
+  transition-duration: var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+  transition-delay: 0s !important;
+}
+
+:root[sessionrestored] :is(.urlbar,#urlbar[popover]){
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay), opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay);
+  transform: translateY(var(--uc-navbar-transform));
+}
+:root[customizing] #nav-bar :is(#urlbar,#searchbar-new),
+#mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#selection-shortcut-action-panel,#chat-shortcuts-options-panel,#tab-preview-panel)) ~ toolbox :is(.urlbar,#urlbar[popover]),
+.browser-titlebar:is(:hover,:focus-within) ~ #nav-bar :is(.urlbar,#urlbar[popover]),
+#nav-bar:is(:hover,:focus-within) :is(.urlbar,#urlbar[popover]),
+#nav-bar #searchbar-new[popover]:is([focused],[open]),
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0ms;
+  transform: translateY(0);
+}
+:where(:root[sessionrestored]) #nav-bar #searchbar-new[popover]:is([focused],[open]),
+:where(:root[sessionrestored]) #urlbar-container > #urlbar[popover]:is([focused],[open]){
+ transition-duration: 100ms; /* Faster when focused */
+}
+/* This ruleset is separate, because not having :has support breaks other selectors as well */
+#mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#selection-shortcut-action-panel,#chat-shortcuts-options-panel,#tab-preview-panel)) ~ #navigator-toolbox > .browser-toolbar{
+  transition-delay: 33ms !important;
+  transform: translateY(0);
+  opacity: 1;
+}
+/* If tabs are in sidebar then nav-bar doesn't normally have its own background - so we nee to add it back */
+#nav-bar.browser-titlebar + #PersonalToolbar,
+#nav-bar.browser-titlebar{
+  background: inherit;
+  background-color: var(--toolbox-bgcolor) !important;
+  background-image: var(--lwt-additional-images);
+  background-repeat: var(--lwt-background-tiling);
+  background-position: var(--lwt-background-alignment);
+}
+#navigator-toolbox:hover > #nav-bar.browser-titlebar + #PersonalToolbar{
+  background-position-y: -40px;
+  transition: background-position-y
+}
+#toolbar-menubar:not([autohide="true"],[autohide=""]) ~ #nav-bar.browser-titlebar{
+  background-position-y: -28px; /* best guess, could vary */
+  border-top: none !important;
+  + #PersonalToolbar{
+    background-position-y: -28px;
+  }
+}
+
+/* Bookmarks toolbar needs so extra rules */
+#PersonalToolbar{ transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important; position: relative; z-index: 1 }
+
+/* Move up the content view */
+:root[sessionrestored]:not([chromehidden~="toolbar"]) > body > #browser{
+  margin-top: var(--uc-navbar-transform);
+}
+@media -moz-pref("browser.fullscreen.autohide"){
+  :root[sessionrestored][sizemode="fullscreen"] > body > #browser{
+    margin-top: revert;
+  }
+}
+/* Compatiblity rules for tabs_on_bottom_v2.css */
+@media -moz-pref("userchrome.autohide-main-toolbar.tabs-on-bottom-patch.enabled"){
+  #nav-bar{
+    margin-bottom: var(--uc-navbar-transform);
+  }
+  #TabsToolbar:not([customizing]){
+    transition:  transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important;
+    position: relative;
+    z-index: 1;
+    background: inherit !important;
+  }
+  #mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#selection-shortcut-action-panel,#chat-shortcuts-options-panel,#tab-preview-panel)) ~ #navigator-toolbox > #TabsToolbar,
+  #navigator-toolbox:is(:hover,:focus-within) > #TabsToolbar{
+    transform: translateY(calc(var(--uc-navbar-transform) * -1)) !important;
+    transition-duration: var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+    transition-delay: 0s !important;
+  }
+  :root[sessionrestored][sizemode] > body > #browser{
+    margin-top: revert;
+  }
+}
