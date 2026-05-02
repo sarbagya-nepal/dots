@@ -1,0 +1,11 @@
+@define-color bg_transparent    transparent;
+@define-color text_primary      {{ colors.on_surface.default.hex }};
+@define-color bg_workspaces     {{ colors.surface_container.default.hex }};
+@define-color bg_primary        {{ colors.surface.default.hex }};
+@define-color accent_blue       {{ colors.primary.default.hex }};
+@define-color hover_gray        {{ colors.surface_container_high.default.hex }};
+@define-color urgent_red        {{ colors.error.default.hex }};
+@define-color success_green     {{ colors.tertiary.default.hex }};
+@define-color warning_yellow    {{ colors.secondary.default.hex }};
+@define-color accent_purple     {{ colors.inverse_primary.default.hex }};
+@define-color muted_green       {{ colors.on_surface_variant.default.hex }};

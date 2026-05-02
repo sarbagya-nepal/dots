@@ -1,4 +1,3 @@
-#!/bin/bash
 killall waybar
 
 if [[ $USER = "chain" ]]
