@@ -8,14 +8,9 @@ configuration {
 }
 
 @theme "/dev/null"
+@import "./colors.rasi"
 
 * {
-  bg: #090e13;
-  bg-alt: #121c26;
-
-  fg: #8ba4b0;
-  fg-alt: #c5c9c7;
-
   background-color: @bg;
 
   border: 0;
@@ -30,11 +25,11 @@ window {
 
 element {
   padding: 8 0;
-  text-color: @fg-alt;
+  text-color: @fg;
 }
 
 element selected {
-  text-color: @fg;
+  text-color: @accent;
 }
 
 element-text {
@@ -48,7 +43,7 @@ element-icon {
 }
 
 entry {
-  background-color: @bg-alt;
+  background-color: @muted;
   padding: 12;
   text-color: @fg;
 }
@@ -70,7 +65,7 @@ mainbox {
 }
 
 prompt {
-  background-color: @bg-alt;
+  background-color: @muted;
   enabled: true;
   padding: 12 0 0 12;
   text-color: @fg;

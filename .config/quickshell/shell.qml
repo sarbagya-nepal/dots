@@ -1,14 +1,23 @@
-import Quickshell
 import QtQuick
-import "modules/background" as BackgroundModule
-import "modules/bar" as BarModule
+import Quickshell
+import "bars"
+import "modules"
 
 ShellRoot {
-    BackgroundModule.Background {
-        id: background
-    }
+    Variants {
+        model: Quickshell.screens
 
-    BarModule.Bar {
-        onMenuClicked: launcher.visible = !launcher.visible
+        Item {
+            required property var modelData
+            property var scr: modelData
+
+            Frame {
+                screen: parent.scr
+            }
+
+            Bars {
+                screen: parent.scr
+            }
+        }
     }
 }
