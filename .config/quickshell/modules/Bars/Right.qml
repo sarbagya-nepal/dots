@@ -1,8 +1,9 @@
+// modules/bars/Right.qml
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
-import "../theme"
+import "../../theme"
 
 RowLayout {
     spacing: 12
@@ -25,13 +26,13 @@ RowLayout {
                     volToggle.running = true;
                     volGetter.running = true;
                 }
-                onWheel: (wheel) => {
-                    let delta = wheel.angleDelta.y > 0 ? 0.05 : -0.05
-                    let newValue = Math.max(0, Math.min(1, volSlider.value + delta))
-                    volSlider.value = newValue
-                    volSetter.command = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", newValue.toFixed(2)]
-                    volSetter.running = true
-                    volGetter.running = true
+                onWheel: wheel => {
+                    let delta = wheel.angleDelta.y > 0 ? 0.05 : -0.05;
+                    let newValue = Math.max(0, Math.min(1, volSlider.value + delta));
+                    volSlider.value = newValue;
+                    volSetter.command = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", newValue.toFixed(2)];
+                    volSetter.running = true;
+                    volGetter.running = true;
                 }
             }
         }
@@ -54,13 +55,13 @@ RowLayout {
                 anchors.fill: parent
                 onPressed: update(mouse)
                 onPositionChanged: update(mouse)
-                onWheel: (wheel) => {
-                    let delta = wheel.angleDelta.y > 0 ? 0.05 : -0.05
-                    let newValue = Math.max(0, Math.min(1, volSlider.value + delta))
-                    volSlider.value = newValue
-                    volSetter.command = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", newValue.toFixed(2)]
-                    volSetter.running = true
-                    volGetter.running = true  // sync icon after scroll
+                onWheel: wheel => {
+                    let delta = wheel.angleDelta.y > 0 ? 0.05 : -0.05;
+                    let newValue = Math.max(0, Math.min(1, volSlider.value + delta));
+                    volSlider.value = newValue;
+                    volSetter.command = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", newValue.toFixed(2)];
+                    volSetter.running = true;
+                    volGetter.running = true;
                 }
                 function update(mouse) {
                     let p = Math.max(0, Math.min(1, mouse.x / width));
@@ -76,7 +77,7 @@ RowLayout {
     Text {
         id: dayText
         color: Theme.fg
-        font.pixelSize: 14
+        font.pixelSize: 13
         font.bold: true
         Layout.alignment: Qt.AlignVCenter
 
@@ -93,7 +94,7 @@ RowLayout {
     Text {
         id: clockText
         color: Theme.fg
-        font.pixelSize: 14
+        font.pixelSize: 13
         font.bold: true
         Layout.alignment: Qt.AlignVCenter
 
@@ -126,13 +127,13 @@ RowLayout {
         running: true
         command: ["bash", "-c", "wpctl get-volume @DEFAULT_AUDIO_SINK@"]
         stdout: SplitParser {
-            onRead: {
+            onRead: data => {
                 let output = data.trim();
                 let match = output.match(/[0-9.]+/);
                 if (match)
                     volSlider.value = parseFloat(match[0]);
-                volIcon.text = output.includes("[MUTED]") ? "󰝟" : (volSlider.value > 0.6 ? "󰕾" : (volSlider.value > 0.2 ? "󰖀" : "󰕿"));
-                volIcon.color = output.includes("[MUTED]") ? Theme.colError : Theme.accent;
+                volIcon.text = output.includes("[MUTED]") ? "󰖁" : (volSlider.value == 0.0 ? "󰖁" : "󰕾" );
+                volIcon.color = output.includes("[MUTED]") ? Theme.colError : (volSlider.value == 0.0 ? Theme.colError : Theme.accent);
             }
         }
     }

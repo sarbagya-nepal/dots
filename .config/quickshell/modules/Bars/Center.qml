@@ -1,16 +1,13 @@
+// modules/bars/Center.qml
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Mpris
-import "../theme"
+import "../../theme"
 
-Rectangle {
+Item {
     id: root
-
-    height: 30
-    width: content.implicitWidth + 30
-    radius: height / 2
-    color: Theme.surface
+    implicitWidth: content.implicitWidth
 
     property MprisPlayer player: {
         for (const p of Mpris.players.values) {
@@ -35,10 +32,6 @@ Rectangle {
         id: content
         spacing: 10
         anchors {
-            left: parent.left
-            leftMargin: 12
-            right: parent.right
-            rightMargin: 12
             verticalCenter: parent.verticalCenter
         }
 
@@ -55,7 +48,7 @@ Rectangle {
             font.pixelSize: 13
             font.weight: Font.Medium
             elide: Text.ElideRight
-            Layout.maximumWidth: 220
+            Layout.maximumWidth: 250
         }
     }
 

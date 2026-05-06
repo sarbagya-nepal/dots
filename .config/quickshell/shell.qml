@@ -1,23 +1,13 @@
+// shell.qml
 import QtQuick
 import Quickshell
-import "bars"
-import "modules"
+import "modules/Bars"
+import "modules/Wallpaper"
+import "modules/Frame"
+import "theme"
 
 ShellRoot {
-    Variants {
-        model: Quickshell.screens
-
-        Item {
-            required property var modelData
-            property var scr: modelData
-
-            Frame {
-                screen: parent.scr
-            }
-
-            Bars {
-                screen: parent.scr
-            }
-        }
-    }
+    Wallpaper {}
+    Bars {}
+    Frame {}
 }
