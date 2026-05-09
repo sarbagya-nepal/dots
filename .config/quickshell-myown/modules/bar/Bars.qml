@@ -3,13 +3,13 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "../../theme"
-import "./components"
+import "../components"
 
 PanelWindow {
-    id: mainBar
-    anchors.top: true
+    id: bar
     anchors.left: true
     anchors.right: true
+    anchors.top: true
     implicitHeight: 36
     color: "transparent"
 
@@ -17,23 +17,23 @@ PanelWindow {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 5
+        implicitHeight: 10
         color: Theme.bg
     }
-    // LEFT
+
+    // Left Module
     Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        width: leftModule.implicitWidth + 24
         color: Theme.bg
-        Layout.alignment: Qt.AlignVCenter
+        implicitWidth: leftSide.implicitWidth + 24
 
         Left {
-            id: leftModule
+            id: leftSide
             anchors.fill: parent
-            anchors.leftMargin: 12
-            anchors.rightMargin: 12
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
         }
         RightSlant {
             anchors.top: parent.top
@@ -42,12 +42,12 @@ PanelWindow {
         }
     }
 
-    // CENTER
+    // Center Module
     Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        width: centerModule.implicitWidth + 24
+        implicitWidth: centerModule.implicitWidth + 24
         color: Theme.bg
 
         LeftSlant {
@@ -67,17 +67,16 @@ PanelWindow {
             anchors.left: parent.right
         }
     }
-
-    // RIGHT
+    // Right Module
     Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        width: rightModule.implicitWidth + 24
+        implicitWidth: rightSide.implicitWidth + 24
         color: Theme.bg
 
         Right {
-            id: rightModule
+            id: rightSide
             anchors.fill: parent
             anchors.leftMargin: 12
             anchors.rightMargin: 12

@@ -9,9 +9,15 @@ RowLayout {
     spacing: 10
 
     Text {
+        id: launcher
         text: ""
         color: Theme.accent
-        font.pixelSize: 20
+        font.pixelSize: 18
+    MouseArea {
+        anchors.fill: parent
+        onClicked: appLauncher.toggle()
+        cursorShape: Qt.PointingHandCursor
+    }
     }
 
     Row {

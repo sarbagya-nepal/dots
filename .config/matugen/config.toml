@@ -1,0 +1,19 @@
+[config]
+
+[templates.ghostty]
+input_path = "~/.config/matugen/templates/ghostty-colors"
+output_path = "~/.cache/matugen/ghostty-colors"
+post_hook = "pkill -SIGUSR2 ghostty"
+
+[templates.quickshell]
+input_path = "~/.config/matugen/templates/quickshell-colors.qml"
+output_path = "~/.config/quickshell/theme/Theme.qml"
+
+[templates.nixvim]
+input_path = "~/.config/matugen/templates/nixvim-theme.lua"
+output_path = "~/.cache/matugen/nixvim-theme.lua"
+
+[templates.pywalfox]
+input_path = "~/.config/matugen/templates/pywalfox-colors.json"
+output_path = "~/.cache/wal/colors.json"
+post_hook = "/home/chain/.nix-profile/bin/pywalfox update"

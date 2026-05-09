@@ -132,7 +132,7 @@ RowLayout {
                 let match = output.match(/[0-9.]+/);
                 if (match)
                     volSlider.value = parseFloat(match[0]);
-                volIcon.text = output.includes("[MUTED]") ? "󰖁" : (volSlider.value == 0.0 ? "󰖁" : "󰕾" );
+                volIcon.text = output.includes("[MUTED]") ? "󰖁" : (volSlider.value == 0.0 ? "󰖁" : "󰕾");
                 volIcon.color = output.includes("[MUTED]") ? Theme.colError : (volSlider.value == 0.0 ? Theme.colError : Theme.accent);
             }
         }
